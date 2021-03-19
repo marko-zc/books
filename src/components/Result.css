@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.book {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    width: 95vw;
+}
+
+.thumb {
+    display: flex;
+    flex-direction: column;
+}
+
+.info > span {
+    margin: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.authors {
+    margin: 10px;
+    padding: 0;
+}
+
+.authors > li {
+    display: inline;
+    list-style: none;
+}
+
+.authors > li:after {
+    content: ", ";
+}
+
+.authors > li:last-child:after {
+    content: "";
+}
+
+.categories {
+    margin: 10px;
+    padding: 0;
+}
+
+.categories > li {
+    display: inline;
+    list-style: none;
+}
+
+.categories > li:after  {
+    content: ", ";
+}
+
+.categories > li:last-child:after {
+    content: "";
+}
+
+.description {
+    margin: auto 10px;
+    padding: 10px;
+    border: 1px solid black;
+}

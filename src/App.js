@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Form from "./components/Form";
+import Result from "./components/Result";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component
+{
+
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      error: null,
+      data: null,
+      value: null
+    }
+  }
+
+  handleChange = (event) =>
+  {
+    const value = event.target.value;
+    this.setState({ value });
+  }
+
+  handleSubmit = (event) =>
+  {
+    fetch("https://www.googleapis.com/books/v1/volumes?q=" + this.state.value + "&maxResults=40")
+      .then(response => response.json())
+      .then(
+        (data) => {
+          this.setState({
+            data,
+            error: data.error
+          });
+        },
+        (error) => {
+          this.setState({
+            error
+          });
+        }
+      ) 
+  }
+
+  render()
+  {
+    const { error, data } = this.state;
+
+    if(error){
+      return <div>Error: {error.message}</div>
+    } else {
+      return (
+      <div>
+          <Form onSubmit={this.handleSubmit} onChange={this.handleChange} />
+          <Result data={data} />
+      </div>
+      );
+    }
+  }
 }
 
 export default App;
